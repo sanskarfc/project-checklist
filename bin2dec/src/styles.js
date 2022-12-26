@@ -29,6 +29,7 @@ export const BinaryTextInput = styled.input`
   border-radius: 2px;
   background: #e0f0f0;
   outline: none;
+
   &:focus {
     border: 1px solid orange;
   }
@@ -55,6 +56,7 @@ export const Button = styled.button`
   border-radius: 2px;
   font-size: 18px;
   cursor: pointer;
+
   &:hover {
     border: 1px solid orange;
     color: orange;
