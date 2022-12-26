@@ -27,10 +27,6 @@ function App() {
 
     setErrorMessage('') // Reset the error message
 
-    // Formulae:
-    // input = 1 => output = 1 * (2^0) = 1
-    // input = 10 => output = (0 * (2^0)) + (1 * (2^1)) = 2
-    // So we reverse and iterate from the back
     const reversedBinaryText = binaryText
       .split('')
       .map(Number) // Convert to a number from string
