@@ -81,16 +81,40 @@ class App extends React.Component {
                     timer: this.state.break_length * 60 + 1
                 });
             }
-        })
+
+            if(this.state.timer === 0 && this.state.mode === "Break"){
+                this.beep.play();
+                this.setState({
+                    mode: "Session",
+                    timer: this.state.session_length * 60 + 1
+                })
+            }
+
+            this.setState({
+                timer: this.state.timer - 1
+            });
+        }, 1000);
+
+        this.setState({
+            timerRunning: true
+        });
     };
 
     displayTimeLeft = seconds => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        const formattedTime = this.formatTime(minutes, remainingSeconds);
 
+        document.title = `(${formattedTime}) ${this.state.mode} - Pomodoro Timer`;
+
+        return formattedTime;
     };
 
-    formatTime = (minute, remainingSeconds) => {
-
-    }
+    formatTime = (minutes, remainingSeconds) => {
+        return `${minutes < 10 ? 0 : ""}${minutes}:${
+            remainingSeconds < 10 ? 0 : ""
+        }${remainingSeconds}`;
+    };
     
     render() {
         return (
@@ -100,11 +124,12 @@ class App extends React.Component {
                         mode = {this.state.mode}
                         timeLeft = {this.displayTimeLeft(this.state.timer)}
                     />
+                    <div className="wrapper">
 
+                    </div> 
                 </header>
             </div>
         )
     }
-
 }
 
