@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// another import ( not writing rn )
+import { FaPlay, FaPause, FaSyncAlt } from "react-icon/fa"
 import Timer from "./components/Timer";
 import Button from "./components/Button"
 import Settings from "./components/Settings"
@@ -116,6 +116,8 @@ class App extends React.Component {
         }${remainingSeconds}`;
     };
     
+
+
     render() {
         return (
             <div id="app-container">
@@ -125,11 +127,67 @@ class App extends React.Component {
                         timeLeft = {this.displayTimeLeft(this.state.timer)}
                     />
                     <div className="wrapper">
-
+                        {this.state.timerRunning === false ? (
+                            <Button 
+                                id="start_stop"
+                                onClick={() => {
+                                    this.countDownTimer(this.state.timer);
+                                }}
+                                icon={<FaPlay className="fa fa-play" />}
+                            >
+                                Start
+                            </Button>
+                        ) : (
+                            <Button 
+                                id="start_stop"
+                                onClick={this.pauseTimer}
+                                icon={<FaPause className="fa fa-pause" />}
+                            >
+                                Pause
+                            </Button>
+                        )}
+                                    
+                        <Button
+                            id="reset"
+                            onClick={this.reset}
+                            icon={<FaSyncAlt className="fa fa-sync-alt" />}
+                        >
+                            Reset
+                        </Button>
                     </div> 
                 </header>
+                <footer>
+                    <Settings
+                        label="Session"
+                        mode="session"
+                        length={this.state.break_length}
+                        increment={this.increment}
+                        decrement={this.decrement}
+                    />
+                </footer>
+                <audio
+                    id="beep"
+                    preload="auto"
+                    src="harp-chord-glissando.mp3"
+                    ref={audio => {
+                        this.beep = audio;
+                    }}
+                />
             </div>
-        )
+        );
     }
 }
+
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement)
+
+
+
+
+
+
+
+
+
 

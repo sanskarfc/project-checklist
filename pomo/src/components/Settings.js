@@ -1,6 +1,5 @@
 import React from "react";
-
-import { some stuff that is incomplete right now !! }
+import { FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
 
 function Settings({label, mode, length, increment, decrement}){
     return (
